@@ -4,18 +4,34 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Twooter 2.0</title>
+  <title>Twooter</title>
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
+  
   <header>
-      <h1>Twooter2.0</h1>
+      <h1 class="title">Twooter</h1>
   </header>
+  
+  <main>
+   <form class="new-form">
+     <label for ="name">Name</label>
+     <input class="u-full-width" type="text" id="name" name="name">
+     <label for ="content">New Post</label>
+     <textarea class="u-full-width" type="text" id="content" name="content"></textarea>
+     <button>Post</button>
+   </form> 
+   <div class="loading">
+     <img src="https://motiongraphicsphoebe.files.wordpress.com/2018/10/8ee212dac057d412972e0c8cc164deee.gif?w=1000&h=">
+   </div>
+  </main>
 
+  <script src="client.js"></script>
 </body>
 </html>
