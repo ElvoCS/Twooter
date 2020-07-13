@@ -58,6 +58,11 @@ function listAllMews(){
 
                 const contents = document.createElement('p');
                 contents.textContent = mew.content;
+
+                div.appendChild(header);
+                div.appendChild(contents);
+
+                mewsElement.appendChild(div);
             });
         });
 }
