@@ -3,6 +3,9 @@ const cors = require('cors');
 
 const app = express();
 
+const db = monk('localhost/twooter')
+const mews = db.get('mews');
+
 app.use(cors());
 app.use(express.json());
 
@@ -12,14 +15,30 @@ app.get('/', (req, res) => {
     });
 });
 
+function isValidNews(mew) {
+    return mew.name && mew.name.toString().trim() !== '' &&
+        mew.content && mew.content.toString().trim() !== '';
+}
+
 app.post('/news', (req, res) => {
-    if(isValidNew(req.body)){
+    if(isValidNews(req.body)){
         //insert into db
-    }else{
+        const mew = {
+            name: req.body.name.toString(),
+            content: req.body.content.toString()
+        };
+
+        mews
+        .insert(mew)
+        .then(createdMew => {
+            res.json(createdMew);
+        });
+
+    } else {
         res.status(422)
         res.json({
             message : 'Name and content is required!'
-        })
+        });
     }
 });
 
