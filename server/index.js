@@ -16,6 +16,14 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/news', (req,res) => {
+mews
+    .find()
+    .then(mews => {
+        res.json(mews);
+    })
+});
+
 function isValidNews(mew) {
     return mew.name && mew.name.toString().trim() !== '' &&
         mew.content && mew.content.toString().trim() !== '';

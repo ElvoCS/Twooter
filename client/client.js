@@ -1,10 +1,16 @@
+
+
 console.log("Hello");
 
 const form = document.querySelector('form'); //grabbing an element by id
 const loadingElement = document.querySelector('.loading');
-const API_URL = 'http://localhost:5000/news'
+const mewsElement = document.querySelector('.mews');
+const API_URL = 'http://localhost:5000/news';
 
 loadingElement.style.display = 'none';
+
+listAllMews();
+
 
 form.addEventListener('submit', (event) => {
     //let's js handle the data
@@ -22,6 +28,7 @@ form.addEventListener('submit', (event) => {
 
     loadingElement.style.display = '';
 
+    //requesting server basically ajax
     fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify(mew),
@@ -30,8 +37,27 @@ form.addEventListener('submit', (event) => {
         }
     }).then(response => response.json())
       .then(createdMew => {
-        form.reset();
         console.log(createdMew);
+        form.reset();
+        form.style.display = '';
         loadingElement.style.display = 'none';
       });
 });
+
+
+function listAllMews(){
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(mews => {
+            console.log(mews);
+            mews.forEach(mew => {
+                const div = document.createElement('div');
+
+                const header = document.createElement('h3');
+                header.textContent = mew.name;
+
+                const contents = document.createElement('p');
+                contents.textContent = mew.content;
+            });
+        });
+}
