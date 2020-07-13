@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const monk = require('monk');
 
 const app = express();
 
-const db = monk('localhost/twooter')
+const db = monk('localhost/twooter');
 const mews = db.get('mews');
 
 app.use(cors());
@@ -24,8 +25,10 @@ app.post('/news', (req, res) => {
     if(isValidNews(req.body)){
         //insert into db
         const mew = {
+            //validation
             name: req.body.name.toString(),
-            content: req.body.content.toString()
+            content: req.body.content.toString(),
+            created: new Date()
         };
 
         mews
